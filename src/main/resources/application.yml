@@ -1,0 +1,20 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: egov-springcloud-discovery
+  security:
+    user:
+      name: admin
+      password: admin
+
+# eureka 가 포함되면 eureka server 도 등록되므로 해제한다.
+eureka:
+  client:
+    register-with-eureka: true # euraka의 registry에 등록할지 여부를 설정, 서버기 때문에
+    fetch-registry: true # registy에 있는 정보를 가져올지 여부를 결정
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname:localhost}:8761/eureka
+  server:
+    peer-node-read-timeout-ms: 10000
